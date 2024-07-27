@@ -9,10 +9,6 @@ const app = new Hono();
 
 export type App = typeof app;
 
-setInterval(() => {
-  console.log(process.memoryUsage().rss);
-}, 60000);
-
 app.use("/static/*", serveStatic({ root: "./" }));
 
 registerDashboard(app);
@@ -31,5 +27,14 @@ process.on("unhandledRejection", (reason, promise) => {
 process.on("uncaughtException", (error) => {
   console.error("Uncaught Exception:", error);
 });
+
+setInterval(() => {
+  const usage = process.memoryUsage();
+  console.log({
+    rss: usage.rss,
+    heapTotal: usage.heapTotal,
+    heapUsed: usage.heapUsed,
+  });
+}, 60000);
 
 export default app;
