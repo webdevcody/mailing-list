@@ -20,8 +20,7 @@ export function registerDashboard(app: App) {
         <ul>
           {newsletter.map((n) => (
             <li key={n.id}>
-              {n.email}
-
+              {n.id} -{n.email}
               <form action={`/newsletter/${n.id}`} method="POST">
                 <button type="submit">X</button>
               </form>
