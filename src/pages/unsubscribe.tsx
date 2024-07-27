@@ -9,6 +9,6 @@ export function registerUnsubscribe(app: App) {
     const newsletterId = c.req.param().id;
     await database.delete(newsletters).where(eq(newsletters.id, newsletterId));
 
-    return c.html(<h1>You've ben unsubscribed!</h1>);
+    return c.html(<h1>You've been unsubscribed!</h1>);
   });
 }
