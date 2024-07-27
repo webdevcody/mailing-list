@@ -4,50 +4,101 @@ import { Layout } from "../components/layout";
 import { database } from "../db";
 import { newsletters } from "../db/schema";
 import type { App } from "../server";
+import { sendEmail } from "../email/send-email";
 
 export function registerDashboard(app: App) {
-  app.get("/", assertIsAuthenticated, async (c) => {
+  app.get("/dashboard", assertIsAuthenticated, async (c) => {
     const newsletter = await database.query.newsletters.findMany();
     return c.html(
       <Layout session={getSession(c)}>
-        <h1>Mailing List</h1>
+        <div className="space-y-8">
+          <h1 class={"text-4xl"}>Mailing List</h1>
 
-        <form action="/" method="POST">
-          <input required type="email" name="email" placeholder="Email" />
-          <button type="submit">Add Email</button>
-        </form>
+          <section>
+            <h2 class={"text-2xl"}>Mass Send Emails</h2>
+            <form action="/actions/send-emails" method="POST">
+              <textarea
+                name="html"
+                required
+                placeholder="html format"
+              ></textarea>{" "}
+              <textarea
+                name="text"
+                required
+                placeholder="text format"
+              ></textarea>
+              <button class={"btn"} type="submit">
+                Send Emails
+              </button>
+            </form>
+          </section>
 
-        <ul>
-          {newsletter.map((n) => (
-            <li key={n.id}>
-              {n.id} -{n.email}
-              <form action={`/newsletter/${n.id}`} method="POST">
-                <button type="submit">X</button>
-              </form>
-            </li>
-          ))}
-        </ul>
+          <form action="/actions/add-email" method="POST">
+            <label htmlFor="emails">Emails (comma separated)</label>
+            <textarea
+              id="emails"
+              required
+              name="emails"
+              placeholder="test@example.com,yolo@example.com"
+            ></textarea>
+            <button class={"btn"} type="submit">
+              Add Email
+            </button>
+          </form>
+
+          <ul>
+            {newsletter.map((n) => (
+              <li key={n.id}>
+                {n.email}
+                <form action={`/actions/delete-email`} method="POST">
+                  <input type="hidden" name="newsletterId" value={n.id} />
+                  <button type="submit">X</button>
+                </form>
+              </li>
+            ))}
+          </ul>
+        </div>
       </Layout>,
     );
   });
 
-  app.post("/", assertIsAuthenticated, async (c) => {
+  app.post("/actions/send-emails", assertIsAuthenticated, async (c) => {
     const body = await c.req.formData();
-    const email = body.get("email") as string;
+    const text = body.get("text") as string;
+    const html = body.get("html") as string;
+
+    const emails = await database.query.newsletters.findMany();
+
+    emails.map((e) => {
+      return sendEmail({
+        email: e.email,
+        subject: "Test Email",
+        htmlBody: html,
+        textBody: text,
+        unsubscribeId: e.id,
+      });
+    });
+
+    return c.redirect("/dashboard");
+  });
+
+  app.post("/actions/add-email", assertIsAuthenticated, async (c) => {
+    const body = await c.req.formData();
+    const emails = body.get("emails") as string;
+    const email = emails.split(",").map((e) => e.trim());
 
     await database
       .insert(newsletters)
-      .values({
-        email,
-      })
+      .values(email.map((e) => ({ email: e })))
       .onConflictDoNothing();
 
-    return c.redirect("/");
+    return c.redirect("/dashboard");
   });
 
-  app.post("/newsletter/:id", assertIsAuthenticated, async (c) => {
-    const id = c.req.param().id;
-    await database.delete(newsletters).where(eq(newsletters.id, id));
-    return c.redirect("/");
+  app.post("/actions/delete-email", assertIsAuthenticated, async (c) => {
+    const body = await c.req.formData();
+    const newsletterId = body.get("newsletterId") as string;
+    await database.delete(newsletters).where(eq(newsletters.id, newsletterId));
+    return c.redirect("/dashboard");
   });
 }

@@ -16,6 +16,13 @@ export function Layout({
           <title>{title}</title>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
+          {process.env.NODE_ENV !== "production" && (
+            <script src="/static/livereload.js"></script>
+          )}
+          <link
+            href={`/static/styles.css?t=${process.env.COMMIT_SHA}`}
+            rel="stylesheet"
+          />
         </head>
 
         <body className="bg-black text-white">

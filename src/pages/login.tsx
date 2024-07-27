@@ -24,6 +24,6 @@ export function registerLogin(app: App) {
       return c.redirect("/login");
     }
     setSession(c, password);
-    return c.redirect("/");
+    return c.redirect("/dashboard");
   });
 }

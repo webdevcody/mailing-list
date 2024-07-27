@@ -2,6 +2,9 @@ const env = {
   DATABASE_URL: process.env.DATABASE_URL as string,
   DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN as string,
   SECRET_API_KEY: process.env.SECRET_API_KEY as string,
+  HOST_NAME: process.env.HOST_NAME as string,
+  MAIL_FROM: process.env.MAIL_FROM as string,
+  MAIL_NAME: process.env.MAIL_NAME as string,
 };
 
 // verify all values in env are defined if not throw an error
