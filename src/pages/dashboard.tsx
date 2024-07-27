@@ -17,6 +17,7 @@ export function registerDashboard(app: App) {
           <section>
             <h2 class={"text-2xl"}>Mass Send Emails</h2>
             <form action="/actions/send-emails" method="POST">
+              <input name="subject" required placeholder="subject" />
               <textarea
                 name="html"
                 required
@@ -65,6 +66,7 @@ export function registerDashboard(app: App) {
   app.post("/actions/send-emails", assertIsAuthenticated, async (c) => {
     const body = await c.req.formData();
     const text = body.get("text") as string;
+    const subject = body.get("subject") as string;
     const html = body.get("html") as string;
 
     const emails = await database.query.newsletters.findMany();
@@ -74,7 +76,7 @@ export function registerDashboard(app: App) {
     emails.map((e) => {
       return sendEmail({
         email: e.email,
-        subject: "Test Email",
+        subject: subject,
         htmlBody: html,
         textBody: text,
         unsubscribeId: e.id,
