@@ -5,6 +5,8 @@ const env = {
   HOST_NAME: process.env.HOST_NAME as string,
   MAIL_FROM: process.env.MAIL_FROM as string,
   MAIL_NAME: process.env.MAIL_NAME as string,
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID as string,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY as string,
 };
 
 // verify all values in env are defined if not throw an error
