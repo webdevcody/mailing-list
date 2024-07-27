@@ -3,7 +3,12 @@ const sesClient = new SESClient({ region: "us-east-1" });
 import throttledQueue from "throttled-queue";
 import { env } from "../env";
 
-const throttle = throttledQueue(1, 1000, true);
+const throttle = throttledQueue(1, 5000, true);
+let pendingCount = 0;
+
+export function addPending(amount: number) {
+  pendingCount += amount;
+}
 
 export function sendEmail({
   email,
@@ -22,7 +27,7 @@ export function sendEmail({
   const unsubscribeTextHtml = `Seibert Software Solutions, LLC @ PO Box 913, Harrison TN, 37341, You can unsubscribe here: ${env.HOST_NAME}/unsubscribe/${unsubscribeId}`;
 
   return throttle(() => {
-    console.info(`sending email to ${email}`);
+    console.info(`sending email to ${email} - ${pendingCount--} remaining`);
 
     return sesClient.send(
       new SendEmailCommand({

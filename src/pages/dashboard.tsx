@@ -4,7 +4,7 @@ import { Layout } from "../components/layout";
 import { database } from "../db";
 import { newsletters } from "../db/schema";
 import type { App } from "../server";
-import { sendEmail } from "../email/send-email";
+import { addPending, sendEmail } from "../email/send-email";
 
 export function registerDashboard(app: App) {
   app.get("/dashboard", assertIsAuthenticated, async (c) => {
@@ -68,6 +68,8 @@ export function registerDashboard(app: App) {
     const html = body.get("html") as string;
 
     const emails = await database.query.newsletters.findMany();
+
+    addPending(emails.length);
 
     emails.map((e) => {
       return sendEmail({
