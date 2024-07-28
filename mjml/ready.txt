@@ -1,0 +1,30 @@
+My Next.js Starter Kit is Live!
+
+Hi Coders,
+
+I'm thrilled to announce that we've just open-sourced our powerful Next.js Starter Kit, now available for FREE under the MIT license!
+
+Whether you're a seasoned developer or just getting started with Next.js, our Starter Kit is designed to streamline your workflow and get your projects up and running faster than ever. With pre-configured settings and best practices built-in, you can focus on what really matters – building amazing applications.
+
+What's Inside the Starter Kit:
+
+- Optimized Next.js setup
+- Pre-configured with essential tools and libraries
+- Ready-to-use components and templates
+- Easy integration with popular services
+
+But that’s not all! To help you make the most out of this starter kit, I'm offering early access to an exclusive walkthrough guide. This comprehensive guide will provide you with a complete code walkthrough, tips, and tricks to get the best out of the starter kit.
+
+Early Access Offer:
+
+Get the full walkthrough guide now and be among the first to dive deep into the code, learn best practices, and accelerate your development process.
+
+Start Using the Starter Kit Now!
+
+Don't miss out on this opportunity to elevate your Next.js projects. Download the free starter kit today and start building something amazing!
+
+https://wdcstarterkit.com
+
+Have a good day and happy coding!
+
+Web Dev Cody

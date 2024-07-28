@@ -1,0 +1,58 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        a
+        <mj-image src="https://wdcstarterkit.com/starterkitcard.png"></mj-image>
+
+        <mj-divider border-color="#F45E43"></mj-divider>
+
+        <mj-text font-size="24px" font-family="helvetica"
+          >My Next.js Starter Kit is Live!</mj-text
+        >
+
+        <mj-text>Hi Coders,</mj-text>
+        <mj-text
+          >I'm thrilled to announce that we've just open-sourced our powerful
+          Next.js Starter Kit, now available for <strong>FREE</strong> under the
+          MIT license!</mj-text
+        >
+        <mj-text
+          >Whether you're a seasoned developer or just getting started with
+          Next.js, our Starter Kit is designed to streamline your workflow and
+          get your projects up and running faster than ever. With pre-configured
+          settings and best practices built-in, you can focus on what really
+          matters – building amazing applications.</mj-text
+        >
+        <mj-text><strong>What's Inside the Starter Kit:</strong></mj-text>
+        <mj-text>- Optimized Next.js setup</mj-text>
+        <mj-text>- Pre-configured with essential tools and libraries</mj-text>
+        <mj-text>- Ready-to-use components and templates</mj-text>
+        <mj-text>- Easy integration with popular services</mj-text>
+        <mj-text
+          >But that’s not all! To help you make the most out of this starter
+          kit, I'm offering early access to an exclusive walkthrough guide. This
+          comprehensive guide will provide you with a complete code walkthrough,
+          tips, and tricks to get the best out of the starter kit.</mj-text
+        >
+        <mj-text><strong>Early Access Offer:</strong></mj-text>
+        <mj-text
+          >Get the full walkthrough guide now and be among the first to dive
+          deep into the code, learn best practices, and accelerate your
+          development process.</mj-text
+        >
+
+        <mj-button mj-class="button" href="https://wdcstarterkit.com"
+          >Start Using the Starter Kit Now!</mj-button
+        >
+        <mj-text
+          >Don't miss out on this opportunity to elevate your Next.js projects.
+          Download the free starter kit today and start building something
+          amazing!</mj-text
+        >
+        <mj-text>Have a good day and happy coding!</mj-text>
+        <mj-text>Web Dev Cody</mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

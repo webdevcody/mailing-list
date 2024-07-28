@@ -40,7 +40,7 @@ export function registerDashboard(app: App) {
               id="emails"
               required
               name="emails"
-              placeholder="test@example.com,yolo@example.com"
+              placeholder="test@example.com\nyolo@example.com"
             ></textarea>
             <button class={"btn"} type="submit">
               Add Email
@@ -89,7 +89,7 @@ export function registerDashboard(app: App) {
   app.post("/actions/add-email", assertIsAuthenticated, async (c) => {
     const body = await c.req.formData();
     const emails = body.get("emails") as string;
-    const email = emails.split(",").map((e) => e.trim());
+    const email = emails.split("\n").map((e) => e.trim());
 
     await database
       .insert(newsletters)
